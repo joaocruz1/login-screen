@@ -1,10 +1,12 @@
 import { CustomButton } from "./styles";
  
- const Button = ({type,text, onClick}) => {
+ const Button = ({type,text, onClick, disabled}) => {
     return ( 
-     <CustomButton 
+     <CustomButton
      type={type}
-     onClick={onClick} > {text} </CustomButton>
+     onClick={onClick} 
+     disabled= {disabled}
+     > {text} </CustomButton>
      );
  }
   
