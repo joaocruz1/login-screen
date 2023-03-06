@@ -1,12 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import GlobalStyle from './styles/global'
-import Login from './pages/login/index.jsx'
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+import App from '../App'
+import AuthProvider from './Contexts/AuthContext'
+import Global from './styles/global'
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <GlobalStyle/>
-    <Login />
+    <Global />
+    <AuthProvider>
+      <App/>
+    </AuthProvider>
   </React.StrictMode>
-);
+)

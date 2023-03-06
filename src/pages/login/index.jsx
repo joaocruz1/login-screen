@@ -1,8 +1,14 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import {Container, Form} from './styles'
 import { validateEmail, validatePassword } from '../../Utils/validators';
+import { AuthContext } from '../../Contexts/AuthContext';
+import { useNavigate } from 'react-router-dom';
+
+
+
+
 
 
 
@@ -10,16 +16,31 @@ const Login = () => {
 
     const [loading,setLoading] = useState(false)
     const [data,setData] = useState({})
+    const {setAuth, auth} = useContext(AuthContext)
+    
+    const navigate = useNavigate()
+
+    
 
     const handleSubmit = async (e) => {
         e.preventDefault()
         try {
-            setLoading(true)
-            alert('Login')
+            
             setLoading(false)
+            if(data.email === "joaovcruz50@gmail.com" && data.password === "1234567"){
+                setAuth(true)
+                navigate('/home')    
+                
+            }else{
+                alert("Email ou senha incorretos")
+            }
+            setLoading(true)
+                       
+
+            
         }
         catch(err) {
-            console.log('Algo deu errado com o Login' + err)
+            alert('Algo deu errado com o Login' + err)
         }
        
     }

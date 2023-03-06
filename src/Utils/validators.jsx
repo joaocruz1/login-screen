@@ -1,14 +1,11 @@
 
-const validateEmail = (email) =>{
+export const validateEmail = (email) =>{
    return email?.toString().includes('@') && email?.toString().includes('.')
 
 }
 
-const validatePassword = (password) =>{
+export const validatePassword = (password) =>{
    return password?.toString().length > 6
 
 }
 
-export {validateEmail,
-        validatePassword        
-}

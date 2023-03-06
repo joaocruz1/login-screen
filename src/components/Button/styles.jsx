@@ -16,7 +16,7 @@ export const CustomButton = styled.button`
     
 
     &:hover {
-        ${({ disabled }) => disabled && 'border:2px solid red; color:red'};
+        ${({ disabled }) => disabled ? 'border:2px solid red; color:red' : 'border:none; background-color:#829'};
         scale:1.03;
     }
 `
