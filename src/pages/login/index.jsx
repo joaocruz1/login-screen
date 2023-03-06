@@ -5,6 +5,8 @@ import {Container, Form} from './styles'
 import { validateEmail, validatePassword } from '../../Utils/validators';
 import { AuthContext } from '../../Contexts/AuthContext';
 import { useNavigate } from 'react-router-dom';
+import Span from '../../components/Span';
+import LinkTo from '../../components/Link';
 
 
 
@@ -14,27 +16,39 @@ import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
 
-    const [loading,setLoading] = useState(false)
-    const [data,setData] = useState({})
-    const {setAuth, auth} = useContext(AuthContext)
+    
+    const {setAuth, user, setUser} = useContext(AuthContext)
+    const [text,setText] = useState("")
     
     const navigate = useNavigate()
 
-    
+    localStorage.setItem(1,"vaiiii")
+
+    console.log(localStorage.getItem(1))
 
     const handleSubmit = async (e) => {
         e.preventDefault()
+        
         try {
             
-            setLoading(false)
-            if(data.email === "joaovcruz50@gmail.com" && data.password === "1234567"){
+            
+            if(user.email === "joaovcruz50@gmail.com" && user.password === "1234567"){
+                setText("Login Efetuado com Sucesso!")
                 setAuth(true)
                 navigate('/home')    
                 
+                
+
             }else{
-                alert("Email ou senha incorretos")
+                setText("Email ou Senha Incorretos!")
+                
+                
             }
-            setLoading(true)
+            
+            
+            setUser({email:'', password:''})
+            
+            
                        
 
             
@@ -44,16 +58,19 @@ const Login = () => {
         }
        
     }
+    
 
     const handleChange = (e)=>{
         
-        setData({...data,[e.target.name]:e.target.value})
+        setUser({...user,[e.target.name]:e.target.value})
+        setText("")
         
     }
    
 
     const validateInput= () =>{
-        return validateEmail(data.email) && validatePassword(data.password)
+
+        return validateEmail(user.email) && validatePassword(user.password)
     }
       
     
@@ -70,21 +87,24 @@ const Login = () => {
                     placeholder='Digite o seu e-mail'
                     onChange={handleChange}
                     type='email'
+                    value={user.email}
                 />
                 <Input
                     name='password'
                     placeholder='Digite a sua senha'
                     onChange={handleChange}
                     type='password'
+                    value={user.password}
                 />
+                <Span text={text} />
                 <Button type='submit'
                         text='Entrar'
                         onClick={handleSubmit}
-                        disabled={loading === true || !validateInput()}
+                        disabled={!validateInput()}
                 />
                 <div>
                     <p>Não possui conta?</p>
-                    <a>Cadastrar</a>
+                    <LinkTo to='singn' text='Cadastrar' /> 
                 </div>
             </Form>
         </Container>

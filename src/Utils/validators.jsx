@@ -5,7 +5,7 @@ export const validateEmail = (email) =>{
 }
 
 export const validatePassword = (password) =>{
-   return password?.toString().length > 6
+   return password?.toString().length > 5
 
 }
 

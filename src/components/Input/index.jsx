@@ -5,7 +5,8 @@ const Input = ({
   name,
   placeholder,
   onChange,
-  type
+  type, 
+  value
 }) => {
   return ( 
     <InputCustom
@@ -13,6 +14,7 @@ const Input = ({
       placeholder={placeholder}
       onChange={onChange}
       type={type}
+      value={value}
     />
    );
 }
