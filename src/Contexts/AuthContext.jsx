@@ -6,14 +6,21 @@ export const AuthContext = createContext()
 //Componente Provider para passar os valores para os Childrens
 function AuthProvider ({children}) {
   const [auth, setAuth] = useState(false)
-  const [user, setUser] = useState({email:'', password:''})
+  const [token, setToken] = useState()
+
+  const [users, setUsers] = useState([
+    
+     {
+      email:'joaovcruz50@gmail.com',
+      password:'1234567'}])
   
+ 
+
+
   
-
-
-
+     
   return (
-    <AuthContext.Provider value={{auth, setAuth, user, setUser}}>
+    <AuthContext.Provider value={{auth, setAuth, users, setUsers,token}}>
       {children}
     </AuthContext.Provider>
   )

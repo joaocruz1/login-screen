@@ -17,40 +17,33 @@ import LinkTo from '../../components/Link';
 const Login = () => {
 
     
-    const {setAuth, user, setUser} = useContext(AuthContext)
-    const [text,setText] = useState("")
+    const {users,setAuth, auth} = useContext(AuthContext)
+    const [userlogin, setUserLogin] = useState({email:"",password:""})
+    const [span,setSpan] = useState("")
+   
     
     const navigate = useNavigate()
 
-    localStorage.setItem(1,"vaiiii")
-
-    console.log(localStorage.getItem(1))
-
+ 
     const handleSubmit = async (e) => {
         e.preventDefault()
         
         try {
             
-            
-            if(user.email === "joaovcruz50@gmail.com" && user.password === "1234567"){
-                setText("Login Efetuado com Sucesso!")
-                setAuth(true)
-                navigate('/home')    
-                
-                
-
-            }else{
-                setText("Email ou Senha Incorretos!")
-                
-                
+            {users.map(user=>{ if(user.email === userlogin.email && user.password=== userlogin.password){
+                    setAuth(true)
+                    navigate("/home")
             }
-            
-            
-            setUser({email:'', password:''})
-            
-            
-                       
+            else{
 
+                setSpan("Email ou senha não econtrados ou incorretos")
+
+            }
+
+            })}
+            
+
+    
             
         }
         catch(err) {
@@ -62,18 +55,18 @@ const Login = () => {
 
     const handleChange = (e)=>{
         
-        setUser({...user,[e.target.name]:e.target.value})
-        setText("")
+        setUserLogin({...userlogin,[e.target.name]:e.target.value})
+        setSpan("")
         
     }
    
 
     const validateInput= () =>{
 
-        return validateEmail(user.email) && validatePassword(user.password)
+        return validateEmail(userlogin.email) && validatePassword(userlogin.password)
     }
       
-    
+  
 
 
     return ( 
@@ -87,16 +80,16 @@ const Login = () => {
                     placeholder='Digite o seu e-mail'
                     onChange={handleChange}
                     type='email'
-                    value={user.email}
+                    value={userlogin.email}
                 />
                 <Input
                     name='password'
                     placeholder='Digite a sua senha'
                     onChange={handleChange}
                     type='password'
-                    value={user.password}
+                    value={userlogin.password}
                 />
-                <Span text={text} />
+                <Span text={span} />
                 <Button type='submit'
                         text='Entrar'
                         onClick={handleSubmit}
@@ -104,7 +97,7 @@ const Login = () => {
                 />
                 <div>
                     <p>Não possui conta?</p>
-                    <LinkTo to='singn' text='Cadastrar' /> 
+                    <LinkTo to='/signin' text='Cadastrar' /> 
                 </div>
             </Form>
         </Container>
